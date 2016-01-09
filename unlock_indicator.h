@@ -1,13 +1,17 @@
 #ifndef _UNLOCK_INDICATOR_H
 #define _UNLOCK_INDICATOR_H
 
+#include <xcb/xcb.h>
+
 typedef enum {
     STATE_STARTED = 0,         /* default state */
     STATE_KEY_PRESSED = 1,     /* key was pressed, show unlock indicator */
     STATE_KEY_ACTIVE = 2,      /* a key was pressed recently, highlight part
                                    of the unlock indicator. */
-    STATE_BACKSPACE_ACTIVE = 3 /* backspace was pressed recently, highlight
-                                   part of the unlock indicator in red. */
+    STATE_BACKSPACE_ACTIVE = 3, /* backspace was pressed recently, highlight
+                                  part of the unlock indicator in red. */
+    STATE_ESCAPE_ACTIVE = 4 /* backspace was pressed recently, highlight
+                                  part of the unlock indicator in red. */
 } unlock_state_t;
 
 typedef enum {
