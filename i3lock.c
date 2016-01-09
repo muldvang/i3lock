@@ -26,7 +26,6 @@
 #include <xkbcommon/xkbcommon.h>
 #include <xkbcommon/xkbcommon-compose.h>
 #include <xkbcommon/xkbcommon-x11.h>
-#include <cairo.h>
 #include <cairo/cairo-xcb.h>
 
 #include "i3lock.h"
@@ -213,11 +212,6 @@ static void clear_pam_wrong(EV_P_ ev_timer *w, int revents) {
     STOP_TIMER(clear_pam_wrong_timeout);
 }
 
-static void clear_indicator_cb(EV_P_ ev_timer *w, int revents) {
-    clear_indicator();
-    STOP_TIMER(clear_indicator_timeout);
-}
-
 static void clear_input(void) {
     input_position = 0;
     clear_password_memory();
@@ -397,8 +391,7 @@ static void handle_key_press(xcb_key_press_event_t *event) {
                 /* Hide the unlock indicator after a bit if the password buffer is
                  * empty. */
                 if (unlock_indicator) {
-                    START_TIMER(clear_indicator_timeout, 1.0, clear_indicator_cb);
-                    unlock_state = STATE_BACKSPACE_ACTIVE;
+                    unlock_state = STATE_ESCAPE_ACTIVE;
                     redraw_screen();
                     unlock_state = STATE_KEY_PRESSED;
                 }
@@ -424,7 +417,6 @@ static void handle_key_press(xcb_key_press_event_t *event) {
 
             /* Hide the unlock indicator after a bit if the password buffer is
          * empty. */
-            START_TIMER(clear_indicator_timeout, 1.0, clear_indicator_cb);
             unlock_state = STATE_BACKSPACE_ACTIVE;
             redraw_screen();
             unlock_state = STATE_KEY_PRESSED;
