@@ -182,8 +182,9 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
         y = BUTTON_RADIUS - ((extents.height / 2) + extents.y_bearing);
 
         cairo_move_to(ctx, x, y);
+        /* cairo_show_text(ctx, passwd); */
 
-        cairo_text_path(ctx, text);
+        cairo_text_path(ctx, passwd);
         cairo_fill_preserve(ctx);
         cairo_set_source_rgb(ctx, 0, 0, 0);
         cairo_set_line_width(ctx, 1.0);
