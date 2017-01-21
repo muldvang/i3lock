@@ -290,7 +290,7 @@ static void input_done(void) {
     /* Clear this state after 2 seconds (unless the user enters another
      * password during that time). */
     ev_now_update(main_loop);
-    START_TIMER(clear_pam_wrong_timeout, TSTAMP_N_SECS(0), clear_pam_wrong);
+    START_TIMER(clear_pam_wrong_timeout, TSTAMP_N_SECS(2), clear_pam_wrong);
 
     /* Cancel the clear_indicator_timeout, it would hide the unlock indicator
      * too early. */
