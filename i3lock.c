@@ -443,7 +443,7 @@ static void handle_key_press(xcb_key_press_event_t *event) {
 
             /* Hide the unlock indicator after a bit if the password buffer is
              * empty. */
-            START_TIMER(clear_indicator_timeout, 1.0, clear_indicator_cb);
+            /* START_TIMER(clear_indicator_timeout, 1.0, clear_indicator_cb); */
             unlock_state = STATE_BACKSPACE_ACTIVE;
             redraw_screen();
             unlock_state = STATE_KEY_PRESSED;
